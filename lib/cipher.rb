@@ -1,12 +1,60 @@
 class Cipher
   ALPHABET = ('A'..'Z').to_a # => ['A', 'B', 'C', ...]
-
+ 
   def self.vigenere(keyword, text)
-    deciphered_keyword = caesar_guess(keyword)
+    deciphered_keyword = caesar_guess(keyword)  
+    #dk = deciphered_keyword
+    #first = caesar(text, 6)
+    #second = caesar(text, 0)
+    #third = caesar(text, 17)
+    #fourth = caesar(text, 3)
+    #fifth = caesar(text, 4)
+    #sixth = caesar(text, 13)
+    #try = first[0] + second[1] + third[2] + fourth[3] + fifth[4] + sixth[5] + first[6] + " " + 
+    #second[8] + third[9] + fourth[10] + " " +
+    #fifth[12] + sixth[13] + first[14] + second[15] + " " +
+    #third[17] + fourth[18] + fifth[19] + sixth[20] + first[21] + " " +
+    #second[23] + third[24] + fourth[25] + fifth[26] + sixth[27] + first[28] + ' ' +
+    #second[30]
+    #charlie = convert_key_to_number(keyword)
+    #dk.split(//)
+    #leggy = keyword.length
+    #eggy = text.length
+    #newer = []
+    #i = 0
+    #while i < eggy
+    #ALPHABET.index("G") #=> 6
+    #try
+    #text.split
 
-    solution
+    keys = deciphered_keyword.each_char.map { |char| ALPHABET.index(char) }
+    iterator = 0
+
+    text.chars.map { |char|
+
+      if ALPHABET.include?(char)
+        if iterator == keys.length
+          iterator = 0
+        end
+
+        key = ALPHABET.rotate(keys[iterator].to_i)
+        iterator += 1
+        ALPHABET[key.index(char)]
+      else
+        char
+      end
+    }.join
   end
 
+  
+  
+
+  def self.convert_key_to_number(keyword)
+    alpha = ALPHABET.each_with_index.map do |letter, idx| 
+      "#{letter}, #{idx}"
+    end  
+
+  end
   # Solve a Caesar cipher with a given offset
   #
   def self.caesar(text, offset)
